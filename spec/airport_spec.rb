@@ -7,20 +7,31 @@ require 'plane'
 # It is up to you how many planes can land in the airport and how that is impermented.
 #
 # If the airport is full then no planes can land
+
+
 describe Airport do
   let(:airport) { Airport.new }
+  let(:plane)   { Plane.new   } #{double :plane, flying?: true , :plane, landed!: true } 
   
   context 'taking off and landing' do
     it 'a plane can land' do
-      expect(plane)to. 
+      airport.land(plane)
+      expect(airport).not_to be_empty
     end
     
     it 'a plane can take off' do
+      airport.land(plane)
+      airport.take_off(plane)
+      expect(airport).to be_empty
     end
   end
   
   context 'traffic control' do
     it 'a plane cannot land if the airport is full' do
+      # airport.fill_with(plane)
+      # expect(airport.plane_count).to eq 25
+      # airport.land(plane)
+      # expect(airport).to be_full
     end
     
     # Include a weather condition using a module.
@@ -40,27 +51,7 @@ describe Airport do
   end
 end
 
-# When we create a new plane, it should have a "flying" status, thus planes can not be created in the airport.
-#
-# When we land a plane at the airport, the plane in question should have its status changed to "landed"
-#
-# When the plane takes of from the airport, the plane's status should become "flying"
-describe Plane do
 
-  let(:plane) { Plane.new }
-  
-  it 'has a flying status when created' do
-  end
-  
-  it 'has a flying status when in the air' do
-  end
-  
-  it 'can take off' do
-  end
-  
-  it 'changes its status to flying after taking of' do
-  end
-end
 
 # grand final
 # Given 6 planes, each plane must land. When the airport is full, every plane must take off again.
@@ -71,3 +62,4 @@ describe "The grand finale (last spec)" do
   it 'all planes can land and all planes can take off' do
   end
 end
+
