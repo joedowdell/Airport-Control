@@ -24,12 +24,17 @@ class Airport
 		@capacity = DEFAULT_CAPACITY
 	end
 
-	def full?
-		plane_count >= capacity
+	def airport_error_handler(plane)
+		raise "error: airport is full" if full?
+		
 	end
 
-	def fill_with(planes)
-		capacity.times {airport(plane)}
+	def full?
+		plane_count >= DEFAULT_CAPACITY
+	end
+
+	def fill_with(plane)
+		capacity.times {airport(planes)}
 	end
 
 	def plane_count
