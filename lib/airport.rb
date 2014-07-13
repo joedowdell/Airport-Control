@@ -4,6 +4,13 @@ class Airport
 
 	DEFAULT_CAPACITY = 25
 
+
+	attr_reader :capacity
+
+	def initialize(options= {})
+		@capacity = options.fetch(:capacity, DEFAULT_CAPACITY)
+	end
+
 	def planes
 		@planes ||= []
 	end
@@ -24,11 +31,6 @@ class Airport
 		@capacity = DEFAULT_CAPACITY
 	end
 
-	def airport_error_handler(plane)
-		raise "error: airport is full" if full?
-		
-	end
-
 	def full?
 		plane_count >= DEFAULT_CAPACITY
 	end
@@ -40,5 +42,15 @@ class Airport
 	def plane_count
 		planes.count
 	end
+
+	def landing_clearance(plane)
+		land(plane) if landing_clear?
+	end
+
+	def landing_clear?
+		!full?
+	end
+
+
 
 end

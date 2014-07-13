@@ -26,13 +26,16 @@ describe Airport do
   end
   
   context 'traffic control' do
-    it 'a plane cannot land if the airport is full' do
-      # expect(airport.capacity).to eq Airport::DEFAULT_CAPACITY
-      # # expect(airport).to be_full
-      # # airport.land(plane)
 
-      # airport.fill_with(plane)
-      # expect { airport.land(plane) }.to raise_error(RuntimeError)
+    def fill_airport
+    airport.capacity.times{ airport.landing_clearance(plane) }
+    end
+
+    it 'a plane cannot land if the airport is full' do
+      
+      fill_airport
+      airport.landing_clearance(plane)
+      expect(airport.plane_count).to eq airport.capacity
 
     end
     
@@ -44,10 +47,10 @@ describe Airport do
     # If the airport has a weather condition of stormy,
     # the plane can not land, and must not be in the airport
     context 'weather conditions' do
-      it 'a plane cannot take off when there is a storm brewing' do
+      xit 'a plane cannot take off when there is a storm brewing' do
       end
       
-      it 'a plane cannot land in the middle of a storm' do
+      xit 'a plane cannot land in the middle of a storm' do
       end
     end
   end
@@ -61,7 +64,7 @@ end
 # Check when all the planes have landed that they have the right status "landed"
 # Once all the planes are in the air again, check that they have the status of flying!
 describe "The grand finale (last spec)" do
-  it 'all planes can land and all planes can take off' do
+  xit 'all planes can land and all planes can take off' do
   end
 end
 
