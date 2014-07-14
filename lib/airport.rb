@@ -2,13 +2,13 @@ require_relative 'plane'
 
 class Airport
 
-	DEFAULT_CAPACITY = 25
-
-
 	attr_reader :capacity
 
-	def initialize(options= {})
+	DEFAULT_CAPACITY = 6
+
+def initialize(options= {})
 		@capacity = options.fetch(:capacity, DEFAULT_CAPACITY)
+		@planes = options.fetch(:planes, [])
 	end
 
 	def planes
@@ -32,7 +32,7 @@ class Airport
 	end
 
 	def full?
-		plane_count >= DEFAULT_CAPACITY
+		plane_count == capacity
 	end
 
 	def fill_with(plane)
@@ -40,7 +40,7 @@ class Airport
 	end
 
 	def plane_count
-		planes.count
+		@planes.count
 	end
 
 	def landing_clearance(plane)
@@ -50,7 +50,6 @@ class Airport
 	def landing_clear?
 		!full?
 	end
-
 
 
 end

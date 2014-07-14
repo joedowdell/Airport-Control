@@ -1,5 +1,6 @@
 require 'airport'
 require 'plane'
+require 'weather'
 
 # A plane currently in the airport can be requested to take off.
 #
@@ -10,8 +11,8 @@ require 'plane'
 
 describe Airport do
   let(:airport) { Airport.new }
-  let(:plane)   { Plane.new   } #{double :plane, flying?: true , :plane, landed!: true } 
-  
+  let(:plane)   { Plane.new   }
+
   context 'taking off and landing' do
     it 'a plane can land' do
       airport.land(plane)
@@ -26,17 +27,11 @@ describe Airport do
   end
   
   context 'traffic control' do
-
-    def fill_airport
-    airport.capacity.times{ airport.landing_clearance(plane) }
-    end
+    
+    let(:airport_full) {Airport.new(capacity: 6, planes:[:plane, :plane, :plane, :plane, :plane, :plane])}
 
     it 'a plane cannot land if the airport is full' do
-      
-      fill_airport
-      airport.landing_clearance(plane)
-      expect(airport.plane_count).to eq airport.capacity
-
+      expect(airport_full).to be_full
     end
     
     # Include a weather condition using a module.
@@ -47,10 +42,24 @@ describe Airport do
     # If the airport has a weather condition of stormy,
     # the plane can not land, and must not be in the airport
     context 'weather conditions' do
-      xit 'a plane cannot take off when there is a storm brewing' do
+
+      it 'can be sunny' do
+        
+      end
+
+      it 'can be stormy' do
+
+      end
+
+
+      it 'a plane cannot take off when there is a storm brewing' do
+    
+
       end
       
-      xit 'a plane cannot land in the middle of a storm' do
+      it 'a plane cannot land in the middle of a storm' do
+        
+
       end
     end
   end
