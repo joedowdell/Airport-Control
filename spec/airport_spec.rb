@@ -32,6 +32,7 @@ describe Airport do
 
     it 'a plane cannot land if the airport is full' do
       expect(airport_full).to be_full
+      expect { airport_full.land plane }.to raise_error (RuntimeError)
     end
     
     # Include a weather condition using a module.

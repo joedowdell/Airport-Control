@@ -16,6 +16,7 @@ def initialize(options= {})
 	end
 
 	def land(plane)
+		raise "Sorry, the airport is full!" if full?
 		planes << plane
 	end
 
