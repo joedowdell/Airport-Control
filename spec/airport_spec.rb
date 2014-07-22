@@ -10,8 +10,13 @@ require 'weather'
 # If the airport is full then no planes can land
 
 describe Airport do
-  let(:airport) { Airport.new }
-  let(:plane)   { Plane.new   }
+  let(:airport)         { Airport.new }
+  let(:plane)           { Plane.new   }
+  let(:stormy_airport)  { Airport.new }
+
+  before (:each) do
+    allow(airport).to receive(:random_weather).and_return("Sunny")
+  end
 
   context 'taking off and landing' do
     it 'a plane can land' do
@@ -44,24 +49,17 @@ describe Airport do
     # the plane can not land, and must not be in the airport
     context 'weather conditions' do
 
-      it 'can be sunny' do
-        
-      end
-
-      it 'can be stormy' do
-
-      end
-
 
       it 'a plane cannot take off when there is a storm brewing' do
-    
-
+        allow(stormy_airport).to receive(:random_weather).and_return("Stormy")
+        expect { stormy_airport.take_off plane }.to raise_error (RuntimeError)
       end
       
       it 'a plane cannot land in the middle of a storm' do
-        
-
+        allow(stormy_airport).to receive(:random_weather).and_return("Stormy")
+        expect { stormy_airport.land plane }.to raise_error (RuntimeError)
       end
+
     end
   end
 end
@@ -73,8 +71,10 @@ end
 # Be careful of the weather, it could be stormy!
 # Check when all the planes have landed that they have the right status "landed"
 # Once all the planes are in the air again, check that they have the status of flying!
-describe "The grand finale (last spec)" do
-  xit 'all planes can land and all planes can take off' do
+xdescribe "The grand finale (last spec)" do
+  it 'all planes can land and all planes can take off' do
+    
+
   end
 end
 

@@ -1,7 +1,9 @@
 require_relative 'plane'
+require_relative 'weather'
 
 class Airport
 
+	include Weather
 	attr_reader :capacity
 
 	DEFAULT_CAPACITY = 6
@@ -17,6 +19,7 @@ def initialize(options= {})
 
 	def land(plane)
 		raise "Sorry, the airport is full!" if full?
+		raise "Stormy weather plane take off delayed" if random_weather == "Stormy"
 		planes << plane
 	end
 
@@ -25,6 +28,7 @@ def initialize(options= {})
 	end
 
 	def take_off(plane)
+		raise "Storm coming can't land plane!" if random_weather == "Stormy"
 		planes.delete(plane)
 	end
 
